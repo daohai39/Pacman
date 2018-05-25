@@ -17,12 +17,11 @@ public class PacmanMove : MonoBehaviour {
 
 	private void FixedUpdate() 
 	{
-		Vector2 p = Vector2.MoveTowards(transform.position, dest, speed);
-		rgbody.MovePosition(p);
-
 		if ((Vector2)transform.position == dest) {
 			HandleInput();
 		}
+
+		HandleMovement();
 
 		HandleAnimation();
 	}
@@ -44,6 +43,12 @@ public class PacmanMove : MonoBehaviour {
 			dest = (Vector2)transform.position + Vector2.left;
 		if(Input.GetKey(KeyCode.RightArrow) && ValidPosition(Vector2.right))
 			dest = (Vector2)transform.position + Vector2.right;
+	}
+
+	private void HandleMovement()
+	{
+		Vector2 p = Vector2.MoveTowards(transform.position, dest, speed);
+		rgbody.MovePosition(p);
 	}
 
 	private void HandleAnimation() 
